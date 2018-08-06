@@ -33,6 +33,12 @@ def prepare_argparser():
       required=True,
       help="Sample name")
 
+  parser.add_argument('--disable_paired_end',
+      dest='atac.paired_end',
+      action='store_false',
+      default=True,
+      help='atac.paired_end')
+
   parser.add_argument('--multimapping',
       dest='atac.multimapping',
       default=4,
