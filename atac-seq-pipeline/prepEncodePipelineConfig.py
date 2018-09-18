@@ -80,35 +80,35 @@ def prepare_argparser():
       default='picard',
       help="filter.dup_marker")
 
-  parser.add_argument'--bowtie2.cpu',
+  parser.add_argument('--cpu.bowtie2',
       dest='atac.bowtie2.cpu',
-      default=4,
+      default=8,
       type=int,
-      help="number of cores for bowtie2 (int)")
+      help="number of cores for bowtie2 (8)")
 
-  parser.add_argument'--trim_adapter.cpu',
+  parser.add_argument('--cpu.trim_adapter',
       dest='atac.trim_adapter.cpu',
       default=2,
       type=int,
-      help="number of cores for trimming (int)")
+      help="number of cores for trimming (2)")
 
-  parser.add_argument'--filter.cpu',
+  parser.add_argument('--cpu.filter',
       dest='atac.filter.cpu',
       default=2,
       type=int,
-      help="number of cores for filtering (int)")
+      help="number of cores for filtering (2)")
 
-  parser.add_argument'--bam2ta.cpu',
+  parser.add_argument('--cpu.bam2ta',
       dest='atac.bam2ta.cpu',
       default=2,
       type=int,
-      help="number of cores for bam2ta (int)")
+      help="number of cores for bam2ta (2)")
 
-  parser.add_argument'--xcor.cpu',
+  parser.add_argument('--cpu.xcor',
       dest='atac.xcor.cpu',
       default=2,
       type=int,
-      help="number of cores for xcor (int)")
+      help="number of cores for xcor (2)")
 
   return(parser)
 
