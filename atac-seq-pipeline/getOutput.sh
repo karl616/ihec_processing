@@ -17,7 +17,7 @@ printHelp(){
   echo -e "  -o DIR\toutput (target) folder" >&2
   echo -e "" >&2
   echo -e " Optional options" >&2
-  echo -e "  -p STR\tprefix to add to combined files" >&2
+  echo -e "  -p STR\tprefix to add to combined files (default: autodetect)" >&2
 }
 
 while getopts "r:o:p:h" opt; do
@@ -36,12 +36,22 @@ if [[ -z "$pipelineOutputFolder" ]] || [[ -z "$outputFolder" ]]; then
   exit 1
 fi
 
+if [[ -z "$prefix" ]]; then
+  qcFile=$(find $pipelineOutputFolder -name qc.json)
+  if [[ -e $qcFile ]]; then
+    prefix=$(
+        cat $qcFile \
+          | python -c "import sys, json; print(json.load(sys.stdin)['name'])"
+      )
+  fi
+fi
+
 #set -x
 
 #identify root of results (assumes there is a call-macs2 folder with
 # glob* subfolders
 rootFolder=$(
-    find output -type d -name "glob-*" |grep "/call-macs2/" \
+    find $pipelineOutputFolder -type d -name "glob-*" |grep "/call-macs2/" \
       | sed -e "s@/call-macs2/.*@@" |sort -u
   )
 
